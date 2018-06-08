@@ -1,0 +1,38 @@
+.dataTables_length {
+    margin-bottom: 10px;
+}
+
+.ccm-ui .dataTables_length label {
+    font-weight: normal;
+}
+
+.copy-to-clipboard-link {
+    display: block;
+}
+
+.diagnosis-section {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.m-b-none {
+    margin-bottom: 0 !important;
+}
+
+.ccm-ui .diagnosis-header {
+    color: rgba(136, 136, 136, 0.51);
+    display: inline-block;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding: 5px 20px 5px 17px;
+}
+
+.fa-check {
+    color: #009688;
+}
+
+.fa-warning {
+    color: #dc9944;
+}

@@ -1,0 +1,142 @@
+1.1.4
+- Allow dashboard pages to be tracked as well. This is configurable and by default disabled.
+
+1.1.3
+- Add information about current realpath_cache_size.
+- Add warning if opcache.validate_timestamps is enabled.
+- Add information about OPcache used and free memory.
+
+1.1.2
+- Add section with suggestions for packages that can improve loading times.
+
+1.1.1
+- Add section with information about the geo location of the server.
+- Add help tooltips for OPcache and Xdebug.
+- Make checks / warnings colored.
+
+1.1.0
+- Add Diagnosis page with details about concrete5, PHP, MySQL versions.
+- Remove empty canvas HTML element.
+
+1.0.1
+- Add vertical line annotations to the graph.
+
+1.0
+- Approved by PRB.
+- Add all concrete5 events to a category.
+- Add help text for on_header_required_ready event.
+
+0.9.21
+- Organize events in event categories.
+- Add colored badges with event category to the report details table.
+- Add colored points to the graph.
+
+0.9.20
+- Show request method on report detail page.
+- Add 'Copy to clipboard' functionality to queries dialog.
+- Swap query details columns.
+
+0.9.19
+- Store the request method, e.g. GET or POST.
+- Show request method in Reports table.
+
+0.9.18
+- Add setting to only write a report is the request took longer than x-ms.
+
+0.9.17
+- Store whether request was an AJAX request or not.
+- Store the request URI along with the report.
+- Add setting to enable tracking AJAX requests.
+- Add AJAX column to Reports table.
+- Add Request URI to Reports table.
+- Format date in Reports table.
+- Add Request URI and AJAX info to details page.
+
+0.9.16
+- Move dashboard pages higher in the dashboard tree.
+
+0.9.15
+- Replace Request::getInstance() with container alternative.
+- Add setting to overwrite Reports, by default this setting is disabled.
+- Make sure 'Settings' button on Reports page is always visible.
+- Move the getSqlQuery method to a dedicated class.
+- Move various classes to namespaced folders.
+
+0.9.14
+- Show total query execution time in Report details table.
+- Add a dialog to display queries and the total execution time.
+
+0.9.13
+- Add setting to log SQL queries.
+- Add Queries table in database.
+- Show number of queries in Report details table.
+
+0.9.12
+- Remove Reports of a certain user when the user is deleted. (#gdpr)
+- Show 20 Reports by default (instead of 10).
+- Add help text for on_user_login event.
+- Improve help text on_page_view event.
+
+0.9.11
+- Don't save tracking information to the session anymore, use singleton instead.
+
+0.9.10
+- Add 'Settings' and 'Reports' buttons to quickly navigate between pages.
+- Add performance notice to Settings page if application is in production environment.
+- Add help text for on_logger_create event.
+
+0.9.9
+- Add page name to report database data to make sorting possible.
+- Add server side sorting to Reports table.
+- Add icons to datatable headings.
+- Sort by Report Date (DESC) by default.
+
+0.9.8
+- Allow firing on_speed_analyzer_track event without any arguments:
+\Events::dispatch('on_speed_analyzer_track');
+
+0.9.7
+- Only enable Speed Analyzer via config setting if it's installed for the first time.
+
+0.9.6
+- Add on_speed_analyzer_track event.
+- Add help for on_speed_analyzer_track event.
+- Improve displaying events with payload as array in graph and table.
+- When a report is regenerated, the guid changes, causing a 'Report not found'
+for a page. This is now fixed by also looking for a report by page id.
+
+0.9.5
+- Add setting to allow overriding the EventDispatcher.
+- Remove FPC requirement for install, but add it as a warning on the reports page.
+- Remove help icon if there is no help text for a certain event.
+- Remove showing outliers with standard deviation. (no bell shaped distribution)
+- Add click event to points in the graph, to scroll to the table.
+- Add help tooltips to settings.
+- Toggle visibility of 'Custom Events' field depending on EventDispatcher setting.
+
+0.9.4
+- Fix array_merge issue if no config is set.
+
+0.9.3
+- Add setting to add custom events.
+- Trigger 'on_speed_analyzer_started' when package has started.
+- Fix help text about 'on_before_dispatch' event.
+- Add help text about 'on_speed_analyzer_started' event.
+- Use 'director' instead of EventDispatcherInterface.
+
+0.9.2
+- Add 'Visit Home page' button if no reports have been generated yet.
+- Add help information for 'on_locale_load' event.
+- Fix CSS issue that outliers weren't red because of the Bootstrap table stripes.
+- Add setting that could enable generating a report when a page is in Edit Mode.
+- Use EventDispatcherInterface instead of EventDispatcher in constructor.
+- Prevent tracking if page is in edit mode or if user is in dashboard area.
+
+0.9.1
+- Don't use native SESSION object.
+- Add preinstall condition for Full Page Caching.
+- Make sure tables are deleted properly.
+- Change min. compatibility to 8.2.1.
+
+0.9.0
+- Initial PRB submission.
