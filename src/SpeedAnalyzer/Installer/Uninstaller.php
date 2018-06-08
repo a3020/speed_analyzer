@@ -23,10 +23,10 @@ class Uninstaller
     public function uninstall()
     {
         foreach ([
-                     'SpeedAnalyzerReportEventQueries',
-                     'SpeedAnalyzerReportEvents',
-                     'SpeedAnalyzerReports',
-                 ] as $tableName) {
+            'SpeedAnalyzerReportEventQueries',
+            'SpeedAnalyzerReportEvents',
+            'SpeedAnalyzerReports',
+        ] as $tableName) {
             $this->dropTable($tableName);
         }
     }
