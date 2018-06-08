@@ -45,6 +45,8 @@ class SpeedAnalyzerServiceProvider implements ApplicationAwareInterface
             $this->app->make(\A3020\SpeedAnalyzer\Listener\OnUserDelete\DeleteReports::class)
                 ->handle($event);
         });
+
+        $this->app['director']->dispatch('on_speed_analyzer_started');
     }
 
     private function registerRoutes()

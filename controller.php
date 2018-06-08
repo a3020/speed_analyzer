@@ -31,8 +31,6 @@ final class Controller extends Package
     {
         $provider = $this->app->make(SpeedAnalyzerServiceProvider::class);
         $provider->register();
-
-        $this->app['director']->dispatch('on_speed_analyzer_started');
     }
 
     public function install()
