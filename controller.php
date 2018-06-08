@@ -56,11 +56,8 @@ final class Controller extends Package
 
     public function uninstall()
     {
-        /** @see \Concrete\Core\Package\PackageService */
-        $pkg = PackageFacade::getByHandle($this->pkgHandle);
-
         $uninstaller = $this->app->make(Uninstaller::class);
-        $uninstaller->uninstall($pkg);
+        $uninstaller->uninstall();
 
         parent::uninstall();
     }

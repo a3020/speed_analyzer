@@ -3,29 +3,40 @@
 namespace A3020\SpeedAnalyzer\Installer;
 
 use Concrete\Core\Database\Connection\Connection;
-use Concrete\Core\Support\Facade\Log;
+use Concrete\Core\Logging\Logger;
 use Exception;
 
 class Uninstaller
 {
-    /**
-     * @var Connection
-     */
+    /** @var Connection */
     private $connection;
 
-    public function __construct(Connection $connection)
+    /** @var Logger */
+    private $logger;
+
+    public function __construct(Connection $connection, Logger $logger)
     {
         $this->connection = $connection;
+        $this->logger = $logger;
     }
 
-    public function uninstall($pkg)
+    public function uninstall()
+    {
+        foreach ([
+                     'SpeedAnalyzerReportEventQueries',
+                     'SpeedAnalyzerReportEvents',
+                     'SpeedAnalyzerReports',
+                 ] as $tableName) {
+            $this->dropTable($tableName);
+        }
+    }
+
+    private function dropTable($tableName)
     {
         try {
-            $this->connection->executeQuery("DROP TABLE IF EXISTS SpeedAnalyzerReportEventQueries");
-            $this->connection->executeQuery("DROP TABLE IF EXISTS SpeedAnalyzerReportEvents");
-            $this->connection->executeQuery("DROP TABLE IF EXISTS SpeedAnalyzerReports");
+            $this->connection->executeQuery("DROP TABLE IF EXISTS ".$tableName);
         } catch (Exception $e) {
-            Log::addDebug($e->getMessage());
+            $this->logger->addDebug($e->getMessage());
         }
     }
 }
