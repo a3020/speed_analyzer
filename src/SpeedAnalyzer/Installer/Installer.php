@@ -16,10 +16,17 @@ class Installer
     /** @var EntityManager */
     private $entityManager;
 
-    public function __construct(Repository $config, EntityManager $entityManager)
+    /** @var DatabaseStructureManager */
+    private $structureManager;
+
+    public function __construct(
+        Repository $config,
+        EntityManager $entityManager,
+        DatabaseStructureManager $structureManager)
     {
         $this->config = $config;
         $this->entityManager = $entityManager;
+        $this->structureManager = $structureManager;
     }
 
     /**
@@ -68,8 +75,7 @@ class Installer
     {
         // Only refresh if the package is installed
         if ($this->config->get('speed_analyzer.enabled') !== null) {
-            $manager = new DatabaseStructureManager($this->entityManager);
-            $manager->clearCacheAndProxies();
+            $this->structureManager->clearCacheAndProxies();
         }
     }
 }
