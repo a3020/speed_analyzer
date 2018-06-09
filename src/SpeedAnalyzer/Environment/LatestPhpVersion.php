@@ -10,7 +10,7 @@ class LatestPhpVersion implements ApplicationAwareInterface
 {
     use ApplicationAwareTrait;
 
-    const ENDPOINT = 'http://php.net/releases/index.php?json';
+    const ENDPOINT = 'https://php.net/releases/index.php?json';
     const CACHE_IN_SECONDS = 86400; // 1 day
 
     /**
