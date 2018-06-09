@@ -46,12 +46,7 @@ class LatestPhpVersion implements ApplicationAwareInterface
             $expensiveCache = $this->app->make('cache/expensive');
             $cacheObject = $expensiveCache->getItem('SpeedAnalyzer/LatestPhpVersion');
             if ($cacheObject->isMiss()) {
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, self::ENDPOINT);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                $output = curl_exec($ch);
-                curl_close($ch);
-                $json = json_decode($output, true);
+                $json = $this->doRequest();
 
                 if ($json) {
                     $value = array_column($json, 'version');
@@ -65,5 +60,25 @@ class LatestPhpVersion implements ApplicationAwareInterface
         }
 
         return $value;
+    }
+
+    /**
+     * Get release information from php.net
+     *
+     * I don't feel comfortable using a client wrapper
+     * seeing the upcoming changes in v9:
+     * https://github.com/concrete5/concrete5/commit/525354244786db6ac2469ad837f912c5ee1109c1#diff-08e106abf73e298b97f9aa4effb66b86R48
+     *
+     * @return string
+     */
+    private function doRequest()
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, self::ENDPOINT);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($ch);
+        curl_close($ch);
+
+        return json_decode($output, true);
     }
 }
