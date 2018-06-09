@@ -34,6 +34,7 @@ class SpeedAnalyzerServiceProvider implements ApplicationAwareInterface
 
     public function register()
     {
+        $this->bindings();
         $this->registerRoutes();
         $this->client->start();
 
@@ -44,6 +45,17 @@ class SpeedAnalyzerServiceProvider implements ApplicationAwareInterface
         });
 
         $this->app['director']->dispatch('on_speed_analyzer_started');
+    }
+
+    private function bindings()
+    {
+        // Make sure the report event repository is injected
+        $this->app->when(\A3020\SpeedAnalyzer\Event\EventRepository::class)
+            ->needs(\Doctrine\ORM\EntityRepository::class)
+            ->give(function(){
+                $this->app->make(EntityManager::class)
+                    ->getRepository(\A3020\SpeedAnalyzer\Entity\ReportEvent::class);
+            });
     }
 
     private function registerRoutes()

@@ -3,20 +3,16 @@
 namespace A3020\SpeedAnalyzer\Event;
 
 use A3020\SpeedAnalyzer\Entity\ReportEvent;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 
 class EventRepository
 {
-    /** @var EntityManager */
-    private $entityManager;
-
-    /** @var \Doctrine\ORM\EntityRepository */
+    /** @var EntityRepository */
     protected $repository;
 
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityRepository $repository)
     {
-        $this->entityManager = $entityManager;
-        $this->repository = $this->entityManager->getRepository(ReportEvent::class);
+        $this->repository = $repository;
     }
 
     /**
