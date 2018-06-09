@@ -6,6 +6,7 @@ use A3020\SpeedAnalyzer\Event\EventRepository;
 use A3020\SpeedAnalyzer\Query\QueryRepository;
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
+use Concrete\Core\Error\UserMessageException;
 use Concrete\Core\Http\Response;
 use Concrete\Core\Page\Page;
 use Concrete\Core\View\View;
@@ -23,7 +24,7 @@ class QueryDetails extends \Concrete\Core\Controller\Controller implements Appli
         $event = $repository->find($eventId);
 
         if (!$event) {
-            die(t('Event not found.'));
+            throw new UserMessageException(t('Event not found.'));
         }
 
         /** @var QueryRepository $repository */
@@ -33,7 +34,7 @@ class QueryDetails extends \Concrete\Core\Controller\Controller implements Appli
         ]);
 
         if (count($queries) === 0) {
-            die(t("No queries found."));
+            throw new UserMessageException(t('No queries found.'));
         }
 
         $view = new View('query_details');
@@ -50,7 +51,7 @@ class QueryDetails extends \Concrete\Core\Controller\Controller implements Appli
         $page = Page::getByPath('/dashboard/speed_analyzer');
         $cp = new \Permissions($page);
         if (!$page || $page->isError() || !$cp->canViewPage()) {
-            die(t('Access Denied'));
+            throw new UserMessageException(t('Access denied.'));
         }
     }
 }
