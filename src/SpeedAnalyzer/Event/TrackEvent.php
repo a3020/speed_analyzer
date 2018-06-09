@@ -4,7 +4,7 @@ namespace A3020\SpeedAnalyzer\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
-class TrackEvent extends Event
+final class TrackEvent extends Event implements TrackEventInterface
 {
     protected $data = [];
 
