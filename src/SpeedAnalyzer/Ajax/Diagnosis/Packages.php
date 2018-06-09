@@ -4,6 +4,7 @@ namespace A3020\SpeedAnalyzer\Ajax\Diagnosis;
 
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
+use Concrete\Core\Error\UserMessageException;
 use Concrete\Core\Http\Response;
 use Concrete\Core\Page\Page;
 use Concrete\Core\Support\Facade\Package;
@@ -32,7 +33,7 @@ class Packages extends \Concrete\Core\Controller\Controller implements Applicati
         $page = Page::getByPath('/dashboard/speed_analyzer');
         $cp = new \Permissions($page);
         if (!$page || $page->isError() || !$cp->canViewPage()) {
-            die(t('Access Denied'));
+            throw new UserMessageException(t('Access Denied'));
         }
     }
 

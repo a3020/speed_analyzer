@@ -6,6 +6,7 @@ use A3020\SpeedAnalyzer\Environment\LatestPhpVersion;
 use A3020\SpeedAnalyzer\Environment\MysqlVersion;
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
+use Concrete\Core\Error\UserMessageException;
 use Concrete\Core\Http\Response;
 use Concrete\Core\Page\Page;
 use Concrete\Core\Updater\Update;
@@ -137,7 +138,7 @@ class Environment extends \Concrete\Core\Controller\Controller implements Applic
         $page = Page::getByPath('/dashboard/speed_analyzer');
         $cp = new \Permissions($page);
         if (!$page || $page->isError() || !$cp->canViewPage()) {
-            die(t('Access Denied'));
+            throw new UserMessageException(t('Access Denied'));
         }
     }
 }

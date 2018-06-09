@@ -6,6 +6,7 @@ use A3020\SpeedAnalyzer\Entity\Report;
 use A3020\SpeedAnalyzer\Report\ReportList;
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
+use Concrete\Core\Error\UserMessageException;
 use Concrete\Core\Http\ResponseFactory;
 use Concrete\Core\Page\Page;
 
@@ -66,7 +67,7 @@ class Reports extends \Concrete\Core\Controller\Controller implements Applicatio
         $page = Page::getByPath('/dashboard/speed_analyzer');
         $cp = new \Permissions($page);
         if (!$page || $page->isError() || !$cp->canViewPage()) {
-            die(t('Access Denied'));
+            throw new UserMessageException(t('Access Denied'));
         }
     }
 
