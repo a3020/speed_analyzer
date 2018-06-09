@@ -149,18 +149,20 @@ class Environment extends \Concrete\Core\Controller\Controller implements Applic
     }
 
     /**
-     * Returns the real path cache size in a human readable format
+     * Returns the max real path cache size
      *
-     * @return string
+     * @return int
      */
     private function getMaxRealPathCacheSize()
     {
-        $memoryInBytes = function ($value) {
-            $unit = strtolower(substr($value, -1, 1));
-            return (int) $value * pow(1024, array_search($unit, array(1 =>'k','m','g')));
-        };
+        // E.g. '16m'
+        $value = ini_get('realpath_cache_size');
 
-        return $memoryInBytes(ini_get('realpath_cache_size'));
+        // E.g. 'm'
+        $unit = strtolower(substr($value, -1, 1));
+
+        // Now we convert back to bytes
+        return (int) $value * pow(1024, array_search($unit, [1 =>'k','m','g']));
     }
 
     /**

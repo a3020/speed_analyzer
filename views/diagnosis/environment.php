@@ -3,7 +3,7 @@
 defined('C5_EXECUTE') or die('Access Denied.');
 
 /** @var int $realPathCacheSize */
-/** @var string $maxRealPathCacheSize */
+/** @var int $maxRealPathCacheSize */
 ?>
 
 <table class="table">
