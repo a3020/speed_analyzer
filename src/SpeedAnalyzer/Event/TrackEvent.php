@@ -42,6 +42,17 @@ final class TrackEvent extends Event implements TrackEventInterface
     public function setData(array $data)
     {
         $json  = json_encode($data);
-        $this->data = json_decode($json, true);
+        if ($json === false) {
+            trigger_error(t("Data can't be json encoded"));
+            return;
+        }
+
+        $data = json_decode($json, true);
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            trigger_error("Data can't be json decoded");
+            return;
+        }
+
+        $this->data = $data;
     }
 }
