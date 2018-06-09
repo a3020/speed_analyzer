@@ -39,16 +39,33 @@ class Environment extends \Concrete\Core\Controller\Controller implements Applic
         return Response::create($view->render());
     }
 
+    /**
+     * Get current concrete5 version
+     *
+     * @return string
+     */
     private function getConcrete5Version()
     {
         return APP_VERSION;
     }
 
+    /**
+     * Get latest concrete5 version or null if not available
+     *
+     * @return string|null
+     */
     private function getLatestConcrete5Version()
     {
         return Update::getLatestAvailableVersionNumber();
     }
 
+    /**
+     * Get latest PHP version or null if not available
+     *
+     * @param $currentVersion
+     *
+     * @return array|null
+     */
     private function getLatestPhpVersion($currentVersion)
     {
         /** @var LatestPhpVersion $service */
@@ -57,6 +74,11 @@ class Environment extends \Concrete\Core\Controller\Controller implements Applic
         return $service->getFor($currentVersion);
     }
 
+    /**
+     * Return the current MySQL version via a query
+     *
+     * @return string
+     */
     private function getMysqlVersion()
     {
         /** @var MysqlVersion $service */
@@ -65,6 +87,11 @@ class Environment extends \Concrete\Core\Controller\Controller implements Applic
         return $service->get();
     }
 
+    /**
+     * Return true if Opcache is enabled
+     *
+     * @return bool
+     */
     private function isOpcacheEnabled()
     {
         if (!function_exists('opcache_get_configuration')) {
@@ -77,6 +104,8 @@ class Environment extends \Concrete\Core\Controller\Controller implements Applic
     }
 
     /**
+     * Return true if 'validate_timestamps' is enabled
+     *
      * @return bool
      */
     private function getOpcacheValidateTimestamps()
@@ -89,14 +118,18 @@ class Environment extends \Concrete\Core\Controller\Controller implements Applic
     }
 
     /**
+     * Return an array of information about opcache
+     *
+     * E.g. how much memory is used and whether the cache is full.
+     *
      * @see http://php.net/manual/en/function.opcache-get-status.php
      *
-     * @return array|bool
+     * @return array|null
      */
     private function getOpcacheStatus()
     {
         if (!$this->isOpcacheEnabled()) {
-            return false;
+            return null;
         }
 
         return opcache_get_status();
@@ -116,6 +149,8 @@ class Environment extends \Concrete\Core\Controller\Controller implements Applic
     }
 
     /**
+     * Returns the real path cache size in a human readable format
+     *
      * @return string
      */
     private function getMaxRealPathCacheSize()
@@ -128,6 +163,11 @@ class Environment extends \Concrete\Core\Controller\Controller implements Applic
         return $memoryInBytes(ini_get('realpath_cache_size'));
     }
 
+    /**
+     * Get version number of Xdebug
+     *
+     * @return string
+     */
     private function getXdebugVersion()
     {
         return phpversion('xdebug');

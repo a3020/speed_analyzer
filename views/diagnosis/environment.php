@@ -2,6 +2,8 @@
 
 defined('C5_EXECUTE') or die('Access Denied.');
 
+/** @var int $realPathCacheSize */
+/** @var string $maxRealPathCacheSize */
 ?>
 
 <table class="table">
@@ -22,8 +24,8 @@ defined('C5_EXECUTE') or die('Access Denied.');
         </td>
         <td>
             <?php
+            /** @var string|null $concrete5VersionAvailable */
             /** @var string $concrete5Version */
-            /** @var string $concrete5VersionAvailable */
             echo version_compare($concrete5VersionAvailable, $concrete5Version, '>') ?
                 '<i class="fa fa-warning"></i> '.$concrete5Version :
                 '<i class="fa fa-check"></i> '.$concrete5Version;
@@ -46,7 +48,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
         <td>
             <?php
             /** @var string $phpVersion */
-            /** @var array|bool $phpVersionAvailable */
+            /** @var array|null $phpVersionAvailable */
             echo is_array($phpVersionAvailable) && count($phpVersionAvailable) ?
                 '<i class="fa fa-warning"></i> '.$phpVersion :
                 '<i class="fa fa-check"></i> '.$phpVersion;
@@ -64,10 +66,10 @@ defined('C5_EXECUTE') or die('Access Denied.');
         </td>
         <td>
             <?php
-            if ($phpVersionAvailable === false) {
-                echo t('Could not retrieve latest version');
-            } else {
+            if (is_array($phpVersionAvailable)) {
                 echo count($phpVersionAvailable) === 0 ? '-' : implode(', ', $phpVersionAvailable);
+            } else {
+                echo t('Could not retrieve latest version');
             }
             ?>
         </td>
@@ -88,7 +90,6 @@ defined('C5_EXECUTE') or die('Access Denied.');
             <?php
             /** @var bool $opcacheEnabled */
             /** @var bool $opcacheValidateTimestamps */
-            /** @var array $opcacheStatus */
             echo $opcacheEnabled ?
                 '<i class="fa fa-check"></i> '.t('Enabled') :
                 '<i class="fa fa-warning"></i> '.t('Not enabled');
@@ -109,6 +110,7 @@ defined('C5_EXECUTE') or die('Access Denied.');
                     echo '</div>';
                 }
 
+                /** @var array $opcacheStatus */
                 if ($opcacheStatus['cache_full']) {
                     echo '<div>';
                     echo '<i class="fa fa-warning"></i> ';
