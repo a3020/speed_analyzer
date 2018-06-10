@@ -66,7 +66,7 @@ class RealQuery
         foreach ($parameters as $key => $value) {
             // Check if named parameters (':param') are used
             if (is_string($key)) {
-                $keys[] = '/:'.ltrim($key, ':').'/';
+                $keys[] = '/:' . ltrim($key, ':') . '/';
                 continue;
             }
 

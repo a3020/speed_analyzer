@@ -55,7 +55,7 @@ class Reports extends \Concrete\Core\Controller\Controller implements Applicatio
                 'is_ajax' => $report->isAjaxRequest() ? t('Yes') : t('No'),
                 'user' => $userName,
                 'created_at' => $dh->formatDateTime($report->getCreatedAt()),
-                'execution_time' => number_format($report->getTotalExecutionTime() * 1000) .' '.t('ms'),
+                'execution_time' => number_format($report->getTotalExecutionTime() * 1000) . ' ' . t('ms'),
             ];
         }
 

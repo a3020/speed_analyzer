@@ -18,9 +18,9 @@ class ReportEventInformation implements JsonSerializable
             /** @var \Concrete\Core\Entity\Block\BlockType\BlockType $bt */
             $bt = BlockType::getByHandle($data['block_handle']);
             if ($bt) {
-                $link = Url::to('/dashboard/blocks/types/inspect/'.$bt->getBlockTypeID());
+                $link = Url::to('/dashboard/blocks/types/inspect/' . $bt->getBlockTypeID());
                 $value = $bt->getBlockTypeName();
-                $html = '<a target="_blank" href="'.$link.'">'.$bt->getBlockTypeName().'</a>';
+                $html = '<a target="_blank" href="' . $link . '">' . $bt->getBlockTypeName() . '</a>';
             } else {
                 $value = $data['block_handle'];
                 $html = $data['block_handle'];
@@ -55,11 +55,11 @@ class ReportEventInformation implements JsonSerializable
         $html = '';
         foreach ($this->entries as $entry) {
             if (is_numeric($entry['type'])) {
-                $html .= $entry['valueHtml'].'<br>';
+                $html .= $entry['valueHtml'] . '<br>';
                 continue;
             }
 
-            $html .= t($entry['type']) .': '.$entry['valueHtml'].'<br>';
+            $html .= t($entry['type']) . ': ' . $entry['valueHtml'] . '<br>';
         }
 
         return $html;
