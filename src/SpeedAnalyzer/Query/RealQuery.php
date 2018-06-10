@@ -18,31 +18,81 @@ class RealQuery
             return $statement;
         }
 
-        $keys = array();
-        $values = array();
-        /*
-         * Get longest keys first, sot the regex replacement doesn't
-         * cut markers (ex : replace ":username" with "'joe'name"
-         * if we have a param name :user )
-         */
-        $isNamedMarkers = false;
-        if (count($parameters) && is_string(key($parameters))) {
-            uksort($parameters, function($k1, $k2) {
+        $parameters = $this->sortParameters($parameters);
+
+        $keys = $this->getKeys($parameters);
+        $values = $this->getValues($parameters);
+
+        if (count($parameters)) {
+            return preg_replace($keys, $values, $statement);
+        }
+
+        return preg_replace($keys, $values, $statement, 1, $count);
+    }
+
+    /*
+     * Sort query parameters
+     *
+     * Get longest keys first, so the regex replacement doesn't
+     * cut markers (ex : replace ":username" with "'joe'name"
+     * if we have a param name :user)
+     *
+     * @param array $parameters
+     *
+     * @return array
+     */
+    private function sortParameters(array $parameters)
+    {
+        if (is_string(key($parameters))) {
+            uksort($parameters, function ($k1, $k2) {
                 return strlen($k2) - strlen($k1);
             });
-            $isNamedMarkers = true;
         }
+
+        return $parameters;
+    }
+
+    /**
+     * Return a list of query placeholder keys
+     *
+     * @param array $parameters
+     *
+     * @return array
+     */
+    private function getKeys(array $parameters)
+    {
+        $keys = [];
+
         foreach ($parameters as $key => $value) {
-            // check if named parameters (':param') or anonymous parameters ('?') are used
+            // Check if named parameters (':param') are used
             if (is_string($key)) {
                 $keys[] = '/:'.ltrim($key, ':').'/';
-            } else {
-                $keys[] = '/[?]/';
+                continue;
             }
-            // bring parameter into human-readable format
+
+            // Anonymous parameters ('?') are used
+            $keys[] = '/[?]/';
+        }
+
+        return $keys;
+    }
+
+    /**
+     * Get the actual query values
+     *
+     * @param array $parameters
+     *
+     * @return array
+     */
+    private function getValues(array $parameters)
+    {
+        $values = [];
+
+        foreach ($parameters as $key => $value) {
+            // Bring parameter into human-readable format
             if (is_string($value)) {
                 $values[] = "'" . addslashes($value) . "'";
-            } elseif(is_int($value)) {
+            } elseif (is_int($value)) {
                 $values[] = strval($value);
             } elseif (is_float($value)) {
                 $values[] = strval($value);
@@ -52,10 +102,7 @@ class RealQuery
                 $values[] = 'NULL';
             }
         }
-        if ($isNamedMarkers) {
-            return preg_replace($keys, $values, $statement);
-        } else {
-            return preg_replace($keys, $values, $statement, 1, $count);
-        }
+
+        return $values;
     }
 }
