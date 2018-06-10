@@ -3,16 +3,15 @@
 namespace A3020\SpeedAnalyzer\Ajax;
 
 use A3020\SpeedAnalyzer\Entity\Report;
+use A3020\SpeedAnalyzer\PermissionsTrait;
 use A3020\SpeedAnalyzer\Report\ReportList;
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
-use Concrete\Core\Error\UserMessageException;
 use Concrete\Core\Http\ResponseFactory;
-use Concrete\Core\Page\Page;
 
 class Reports extends \Concrete\Core\Controller\Controller implements ApplicationAwareInterface
 {
-    use ApplicationAwareTrait;
+    use ApplicationAwareTrait, PermissionsTrait;
 
     public function getPage()
     {
@@ -60,15 +59,6 @@ class Reports extends \Concrete\Core\Controller\Controller implements Applicatio
         }
 
         return $this->app->make(ResponseFactory::class)->json($json);
-    }
-
-    public function checkPermissions()
-    {
-        $page = Page::getByPath('/dashboard/speed_analyzer');
-        $cp = new \Permissions($page);
-        if (!$page || $page->isError() || !$cp->canViewPage()) {
-            throw new UserMessageException(t('Access Denied'));
-        }
     }
 
     private function getSortColumn()

@@ -3,6 +3,7 @@
 namespace A3020\SpeedAnalyzer\Ajax;
 
 use A3020\SpeedAnalyzer\Event\EventRepository;
+use A3020\SpeedAnalyzer\PermissionsTrait;
 use A3020\SpeedAnalyzer\Query\QueryRepository;
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
@@ -13,7 +14,7 @@ use Concrete\Core\View\View;
 
 class QueryDetails extends \Concrete\Core\Controller\Controller implements ApplicationAwareInterface
 {
-    use ApplicationAwareTrait;
+    use ApplicationAwareTrait, PermissionsTrait;
 
     public function view($eventId = null)
     {
@@ -44,14 +45,5 @@ class QueryDetails extends \Concrete\Core\Controller\Controller implements Appli
         ]);
 
         return Response::create($view->render());
-    }
-
-    public function checkPermissions()
-    {
-        $page = Page::getByPath('/dashboard/speed_analyzer');
-        $cp = new \Permissions($page);
-        if (!$page || $page->isError() || !$cp->canViewPage()) {
-            throw new UserMessageException(t('Access denied.'));
-        }
     }
 }
