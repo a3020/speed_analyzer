@@ -22,7 +22,8 @@ class Reports extends \Concrete\Core\Controller\Controller implements Applicatio
         $list->sortByTotalExecutionTimeDesc();
         $list->sortBy($this->getSortColumn(), $this->getSortDirection());
 
-        $itemsPerPage = (int) $this->request->get('length', 10);
+        // Max number of reports on a page with an upper limit of 100
+        $itemsPerPage = min((int) $this->request->get('length', 10), 100);
 
         $pagination = $list->getPagination();
         $pagination->setMaxPerPage($itemsPerPage);

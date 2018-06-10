@@ -79,11 +79,11 @@ if ($isEnabled && !$hasData) {
     <thead>
         <tr>
             <th><?php echo t('Requested Page'); ?></th>
-            <th style="width: 220px"><?php  echo t('User') ?></th>
-            <th style="width: 135px"><?php  echo t('Execution Time') ?></th>
-            <th style="width: 65px"><?php  echo t('Method') ?></th>
-            <th style="width: 65px"><?php  echo t('AJAX') ?></th>
-            <th style="width: 135px"><?php  echo t('Report Date') ?></th>
+            <th style="width: 220px"><?php echo t('User') ?></th>
+            <th style="width: 135px"><?php echo t('Execution Time') ?></th>
+            <th style="width: 65px"><?php echo t('Method') ?></th>
+            <th style="width: 65px"><?php echo t('AJAX') ?></th>
+            <th style="width: 135px"><?php echo t('Report Date') ?></th>
         </tr>
     </thead>
     <tbody>
@@ -103,7 +103,7 @@ if ($isEnabled && !$hasData) {
             searching: false,
             serverSide: true,
             ajax: '<?php echo Url::to('/ccm/system/speed_analyzer/reports'); ?>',
-            lengthMenu: [[20, 40, 80, -1], [20, 40, 80, '<?php echo t('All') ?>']],
+            lengthMenu: [[20, 50, 100], [20, 50, 100]],
             columns: [
                 {
                     data: function(row, type, val) {
