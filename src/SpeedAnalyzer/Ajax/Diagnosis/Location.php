@@ -6,6 +6,7 @@ use A3020\SpeedAnalyzer\PermissionsTrait;
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
 use Concrete\Core\Geolocator\GeolocationResult;
+use Concrete\Core\Http\Request;
 use Concrete\Core\Http\Response;
 use Concrete\Core\View\View;
 use Exception;
@@ -67,8 +68,11 @@ class Location extends \Concrete\Core\Controller\Controller implements Applicati
      */
     private function getServerIp()
     {
-        if (isset($_SERVER['SERVER_ADDR'])) {
-            return $_SERVER['SERVER_ADDR'];
+        /** @var Request $request */
+        $request = $this->app->make(Request::class);
+
+        if ($request->server->has('REMOTE_ADDR')) {
+            return $request->server->get('REMOTE_ADDR');
         };
 
         return false;
