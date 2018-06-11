@@ -34,6 +34,8 @@ class WriteReport implements ApplicationAwareInterface
     }
 
     /**
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function toDatabase()
@@ -58,6 +60,10 @@ class WriteReport implements ApplicationAwareInterface
 
         if ($this->config->get('speed_analyzer.reports.overwrite_reports', false)) {
             $this->deleteOldRecords($page);
+        }
+
+        if ($this->hasTooManyReports((int) $this->config->get('speed_analyzer.reports.hard_limit', 1000))) {
+            return;
         }
 
         $report = $this->makeReport($page);
@@ -149,5 +155,30 @@ class WriteReport implements ApplicationAwareInterface
         $this->entityManager->persist($report);
 
         return $report;
+    }
+
+    /**
+     * Return true if we've reached x-number of Reports
+     *
+     * The table can simply overload if the user has forgotten
+     * to disable the analyzer or to enable 'overwrite reports'.
+     *
+     * @param int $max
+     *
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     *
+     * @return bool
+     */
+    private function hasTooManyReports($max = 1000)
+    {
+        $numberOfRecords = $this->entityManager
+            ->createQueryBuilder()
+            ->select('COUNT(1)')
+            ->from(Report::class, 'r')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $numberOfRecords >= $max;
     }
 }
