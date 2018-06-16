@@ -3,9 +3,11 @@
 defined('C5_EXECUTE') or die('Access Denied.');
 
 use Concrete\Core\Support\Facade\Url;
+
+/** @var bool $isEnabled */
 ?>
 
-<div class="ccm-dashboard-header-buttons btn-group">
+<div class="ccm-dashboard-header-buttons">
     <?php
     /** @var bool $hasData */
     if ($hasData) {
@@ -20,6 +22,25 @@ use Concrete\Core\Support\Facade\Url;
     }
     ?>
 
+    <?php
+    if ($isEnabled === false) {
+        ?>
+        <a class="btn btn-default"
+            href="<?php echo $this->action('enable') ?>">
+            <?php echo t('Enable Speed Analyzer'); ?>
+        </a>
+        <?php
+    } else {
+        ?>
+        <a
+            class="btn btn-default"
+            href="<?php echo $this->action('disable') ?>">
+            <?php echo t('Disable Speed Analyzer'); ?>
+        </a>
+        <?php
+    }
+    ?>
+
     <a
         class="btn btn-default"
         href="<?php echo Url::to('/dashboard/speed_analyzer/settings') ?>">
@@ -28,14 +49,11 @@ use Concrete\Core\Support\Facade\Url;
 </div>
 
 <?php
-/** @var bool $isEnabled */
 if ($isEnabled === false) {
     ?>
     <div class="alert alert-warning">
         <?php
-        echo t('%s is currently disabled. No new reports will be generated. Go to %s to enable %s.',
-            t('Speed Analyzer'),
-            t('Settings'),
+        echo t('%s is currently disabled. No new reports will be generated.',
             t('Speed Analyzer')
         );
         ?>

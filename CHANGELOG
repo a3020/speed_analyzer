@@ -1,3 +1,6 @@
+1.2.1
+- Add toggle button to easily enable and disable Speed Analyzer.
+
 1.2.0
 - Various code and performance improvements.
 - Implement a hard limit of 1000 reports in case add-on is misconfigured.

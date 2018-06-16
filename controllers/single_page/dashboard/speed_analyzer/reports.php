@@ -50,6 +50,30 @@ final class Reports extends DashboardPageController
         $this->set('hasData', (bool) $list->getTotalResults());
     }
 
+    public function enable()
+    {
+        /** @var Repository $enableLog */
+        $config = $this->app->make(Repository::class);
+
+        $config->save('speed_analyzer.enabled', true);
+
+        $this->flash('success', t('%s is now enabled.', t('Speed Analyzer')));
+
+        return Redirect::to('/dashboard/speed_analyzer/reports');
+    }
+
+    public function disable()
+    {
+        /** @var Repository $enableLog */
+        $config = $this->app->make(Repository::class);
+
+        $config->save('speed_analyzer.enabled', false);
+
+        $this->flash('success', t('%s is now disabled.', t('Speed Analyzer')));
+
+        return Redirect::to('/dashboard/speed_analyzer/reports');
+    }
+
     /**
      * Show a report
      *
