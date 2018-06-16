@@ -3,6 +3,7 @@
 namespace A3020\SpeedAnalyzer\Provider;
 
 use A3020\SpeedAnalyzer\Client;
+use A3020\SpeedAnalyzer\Request\Tracker;
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
 use Concrete\Core\Config\Repository\Repository;
@@ -46,6 +47,8 @@ class SpeedAnalyzerServiceProvider implements ApplicationAwareInterface
 
     private function bindings()
     {
+        $this->app->singleton(Tracker::class, Tracker::class);
+
         // Make sure the report event repository is injected
         $this->app->when(\A3020\SpeedAnalyzer\Event\EventRepository::class)
             ->needs(\Doctrine\ORM\EntityRepository::class)
