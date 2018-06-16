@@ -16,13 +16,13 @@ class LatestPhpVersion implements ApplicationAwareInterface
     /**
      * @param string $currentVersion
      *
-     * @return array|bool
+     * @return array|null
      */
     public function getFor($currentVersion)
     {
         $versionsAvailable = $this->get();
         if ($versionsAvailable === false) {
-            return false;
+            return null;
         }
 
         $newerVersions = [];
