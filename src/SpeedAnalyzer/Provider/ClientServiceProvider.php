@@ -14,15 +14,17 @@ class ClientServiceProvider implements ApplicationAwareInterface
     /** @var Repository */
     protected $config;
 
-    public function __construct(Repository $config)
+    /** @var EventServiceProvider */
+    private $eventServiceProvider;
+
+    public function __construct(Repository $config, EventServiceProvider $eventServiceProvider)
     {
         $this->config = $config;
+        $this->eventServiceProvider = $eventServiceProvider;
     }
 
     public function register()
     {
-        $this->app->singleton('speed_analyzer_tracker', Tracker::class);
-
         $this->overrideDispatcher();
         $this->registerEventListeners();
     }
@@ -39,8 +41,7 @@ class ClientServiceProvider implements ApplicationAwareInterface
             return;
         }
 
-        $provider = $this->app->make(EventServiceProvider::class);
-        $provider->register();
+        $this->eventServiceProvider->register();
     }
 
     /**
@@ -102,7 +103,8 @@ class ClientServiceProvider implements ApplicationAwareInterface
 
         foreach ($events as $eventName) {
             $this->app['director']->addListener($eventName, function ($event) use ($eventName) {
-                $this->app->make(\A3020\SpeedAnalyzer\Listener\Track::class)->handle($eventName, $event);
+                $this->app->make(\A3020\SpeedAnalyzer\Listener\Track::class)
+                    ->handle($eventName, $event);
             });
         }
     }
