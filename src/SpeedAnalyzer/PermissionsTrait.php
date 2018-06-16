@@ -2,9 +2,9 @@
 
 namespace A3020\SpeedAnalyzer;
 
-use A3020\ConditionalContent\Checker\Checker;
 use Concrete\Core\Error\UserMessageException;
 use Concrete\Core\Page\Page;
+use Concrete\Core\Permission\Checker;
 
 trait PermissionsTrait
 {
