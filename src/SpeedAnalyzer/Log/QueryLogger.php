@@ -7,7 +7,7 @@ use Doctrine\DBAL\Logging\DebugStack;
 
 class QueryLogger
 {
-    public function __construct(DebugStack $debugStack, Connection $connection)
+    public function __construct(Connection $connection, DebugStack $debugStack)
     {
         $connection
             ->getConfiguration()
