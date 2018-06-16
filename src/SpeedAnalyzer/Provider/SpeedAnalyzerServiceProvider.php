@@ -3,11 +3,9 @@
 namespace A3020\SpeedAnalyzer\Provider;
 
 use A3020\SpeedAnalyzer\Client;
-use A3020\SpeedAnalyzer\Request\Tracker;
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
 use Concrete\Core\Config\Repository\Repository;
-use Concrete\Core\Http\Request;
 use Concrete\Core\Routing\RouterInterface;
 use Doctrine\ORM\EntityManager;
 
@@ -20,9 +18,8 @@ class SpeedAnalyzerServiceProvider implements ApplicationAwareInterface
 
     /** @var Client */
     private $client;
-    /**
-     * @var RouterInterface
-     */
+
+    /** @var RouterInterface */
     private $router;
 
     public function __construct(Repository $config, RouterInterface $router, Client $client)
