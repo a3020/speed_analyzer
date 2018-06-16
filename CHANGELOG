@@ -1,3 +1,7 @@
+1.2.0
+- Various code and performance improvements.
+- Implement a hard limit of 1000 reports in case add-on is misconfigured.
+
 1.1.4
 - Allow dashboard pages to be tracked as well. This is configurable and by default disabled.
 

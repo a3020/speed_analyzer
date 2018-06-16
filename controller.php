@@ -12,7 +12,7 @@ final class Controller extends Package
 {
     protected $pkgHandle = 'speed_analyzer';
     protected $appVersionRequired = '8.2.1';
-    protected $pkgVersion = '1.1.4';
+    protected $pkgVersion = '1.2.0';
     protected $pkgAutoloaderRegistries = [
         'src/SpeedAnalyzer' => '\A3020\SpeedAnalyzer',
     ];
