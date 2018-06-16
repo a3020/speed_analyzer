@@ -67,7 +67,9 @@ class Installer
             }
 
             $singlePage = Single::add($path, $pkg);
-            $singlePage->update($name);
+            $singlePage->update([
+                'cName' => $name,
+            ]);
         }
     }
 
