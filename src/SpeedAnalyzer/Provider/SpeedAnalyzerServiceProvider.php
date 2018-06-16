@@ -53,7 +53,7 @@ class SpeedAnalyzerServiceProvider implements ApplicationAwareInterface
         $this->app->when(\A3020\SpeedAnalyzer\Event\EventRepository::class)
             ->needs(\Doctrine\ORM\EntityRepository::class)
             ->give(function(){
-                $this->app->make(EntityManager::class)
+                return $this->app->make(EntityManager::class)
                     ->getRepository(\A3020\SpeedAnalyzer\Entity\ReportEvent::class);
             });
     }
