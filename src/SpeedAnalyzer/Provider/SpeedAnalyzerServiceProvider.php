@@ -28,8 +28,8 @@ class SpeedAnalyzerServiceProvider implements ApplicationAwareInterface
     public function __construct(Repository $config, RouterInterface $router, Client $client)
     {
         $this->config = $config;
-        $this->client = $client;
         $this->router = $router;
+        $this->client = $client;
     }
 
     public function register()
