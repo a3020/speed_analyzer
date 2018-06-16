@@ -2,7 +2,6 @@
 
 namespace A3020\SpeedAnalyzer\Provider;
 
-use A3020\SpeedAnalyzer\Client;
 use A3020\SpeedAnalyzer\Request\Tracker;
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
@@ -15,13 +14,9 @@ class ClientServiceProvider implements ApplicationAwareInterface
     /** @var Repository */
     protected $config;
 
-    /** @var Client */
-    private $client;
-
-    public function __construct(Repository $config, Client $client)
+    public function __construct(Repository $config)
     {
         $this->config = $config;
-        $this->client = $client;
     }
 
     public function register()
