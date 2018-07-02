@@ -8,3 +8,6 @@ concrete5 8.2.1 add-on to analyze how PHP loads a page request. It does so by tr
 
 ## Links
 https://www.concrete5.org/marketplace/addons/speed-analyzer/
+
+
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
