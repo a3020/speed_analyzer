@@ -38,7 +38,7 @@ class EventInfo
             'on_before_dispatch' => t("Triggered in the %s class.", "DefaultRunner") . ' ' . t("Runs when the request is handled and after on_start methods on all the packages have been called."),
             'on_header_required_ready' => t("Triggered in %s file.", "header_required.php") . ' ' . t("Runs when the header is rendered and when e.g. the meta tags and page title are used in the output."),
             'on_logger_create' => t("Triggered in the %s class.", "Logger") . ' ' . t("Runs after a new instance of %s is created.", "Logger"),
-            'on_locale_load' => t("Triggered in the %s class.", "en_US") . ' ' . t("Runs when the locale (e.g. %s) changes.", "en_US"),
+            'on_locale_load' => t("Triggered in the %s class.", "Localization") . ' ' . t("Runs when the locale (e.g. %s) changes.", "en_US"),
             'on_page_view' => t("Triggered in the %s class.", "ResponseFactory") . ' ' . t("Runs when a page is requested and the page is valid. A statistics package would at this point qualify the request as a page hit. Runs before the on_start method of a page controller has been called. At this point no blocks etc. from the page have been loaded yet."),
             'on_start' => t("Triggered in the %s class.", "View") . ' ' . t("Runs before the page starts rendering and before the on_before_render method has been called."),
             'on_before_render' => t("Triggered in the %s class.", "View") . ' ' . t("Runs before a template is included / to be rendered."),
