@@ -93,12 +93,12 @@ class RealQuery
             if (is_string($value)) {
                 $values[] = "'" . addslashes($value) . "'";
             } elseif (is_int($value)) {
-                $values[] = strval($value);
+                $values[] = (string) $value;
             } elseif (is_float($value)) {
-                $values[] = strval($value);
+                $values[] = (string) $value;
             } elseif (is_array($value)) {
                 $values[] = implode(',', $value);
-            } elseif (is_null($value)) {
+            } elseif ($value === null) {
                 $values[] = 'NULL';
             }
         }

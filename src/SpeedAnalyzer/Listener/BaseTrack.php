@@ -11,7 +11,6 @@ use Concrete\Core\Application\ApplicationAwareTrait;
 use Concrete\Core\Config\Repository\Repository;
 use Concrete\Core\Database\Connection\Connection;
 use Doctrine\DBAL\Logging\DebugStack;
-use Doctrine\ORM\EntityManager;
 
 class BaseTrack implements ApplicationAwareInterface
 {

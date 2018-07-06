@@ -7,7 +7,6 @@ use A3020\SpeedAnalyzer\PermissionsTrait;
 use A3020\SpeedAnalyzer\Query\QueryRepository;
 use Concrete\Core\Error\UserMessageException;
 use Concrete\Core\Http\Response;
-use Concrete\Core\Page\Page;
 use Concrete\Core\View\View;
 
 class QueryDetails extends \Concrete\Core\Controller\Controller
