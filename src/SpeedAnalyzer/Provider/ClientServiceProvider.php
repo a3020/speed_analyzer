@@ -2,7 +2,6 @@
 
 namespace A3020\SpeedAnalyzer\Provider;
 
-use A3020\SpeedAnalyzer\Request\Tracker;
 use Concrete\Core\Application\ApplicationAwareInterface;
 use Concrete\Core\Application\ApplicationAwareTrait;
 use Concrete\Core\Config\Repository\Repository;

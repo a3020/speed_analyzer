@@ -22,8 +22,8 @@ class Environment extends \Concrete\Core\Controller\Controller
         $view->addScopeItems([
             'concrete5Version' => $this->getConcrete5Version(),
             'concrete5VersionAvailable' => $this->getLatestConcrete5Version(),
-            'phpVersion' => phpversion(),
-            'phpVersionAvailable' => $this->getLatestPhpVersion(phpversion()),
+            'phpVersion' => PHP_VERSION,
+            'phpVersionAvailable' => $this->getLatestPhpVersion(PHP_VERSION),
             'mysqlVersion' => $this->getMysqlVersion(),
             'xdebugVersion' => $this->getXdebugVersion(),
             'opcacheEnabled' => $this->isOpcacheEnabled(),

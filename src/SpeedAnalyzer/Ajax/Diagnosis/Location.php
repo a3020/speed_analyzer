@@ -71,7 +71,7 @@ class Location extends \Concrete\Core\Controller\Controller
 
         if ($request->server->has('REMOTE_ADDR')) {
             return $request->server->get('REMOTE_ADDR');
-        };
+        }
 
         return false;
     }
