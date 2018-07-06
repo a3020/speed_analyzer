@@ -3,15 +3,13 @@
 namespace A3020\SpeedAnalyzer\Ajax\Diagnosis;
 
 use A3020\SpeedAnalyzer\PermissionsTrait;
-use Concrete\Core\Application\ApplicationAwareInterface;
-use Concrete\Core\Application\ApplicationAwareTrait;
 use Concrete\Core\Http\Response;
 use Concrete\Core\Support\Facade\Package;
 use Concrete\Core\View\View;
 
-class Packages extends \Concrete\Core\Controller\Controller implements ApplicationAwareInterface
+class Packages extends \Concrete\Core\Controller\Controller
 {
-    use ApplicationAwareTrait, PermissionsTrait;
+    use PermissionsTrait;
 
     public function view()
     {

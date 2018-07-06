@@ -5,13 +5,11 @@ namespace A3020\SpeedAnalyzer\Ajax;
 use A3020\SpeedAnalyzer\Entity\Report;
 use A3020\SpeedAnalyzer\PermissionsTrait;
 use A3020\SpeedAnalyzer\Report\ReportList;
-use Concrete\Core\Application\ApplicationAwareInterface;
-use Concrete\Core\Application\ApplicationAwareTrait;
 use Concrete\Core\Http\ResponseFactory;
 
-class Reports extends \Concrete\Core\Controller\Controller implements ApplicationAwareInterface
+class Reports extends \Concrete\Core\Controller\Controller
 {
-    use ApplicationAwareTrait, PermissionsTrait;
+    use PermissionsTrait;
 
     public function getPage()
     {
