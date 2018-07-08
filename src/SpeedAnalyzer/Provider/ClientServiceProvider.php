@@ -74,7 +74,7 @@ class ClientServiceProvider implements ApplicationAwareInterface
     /**
      * Manually register events to listen to
      *
-     * There is a built-in list which is merged with
+     * This is a built-in list which is merged with
      * custom events from the config (if present).
      *
      * @param array $customEvents
@@ -94,6 +94,7 @@ class ClientServiceProvider implements ApplicationAwareInterface
             'on_page_view',
             'on_block_load',
             'on_block_before_render',
+            'on_block_output',
             'on_shutdown',
         ];
 

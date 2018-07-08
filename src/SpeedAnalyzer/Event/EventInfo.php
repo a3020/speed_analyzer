@@ -44,6 +44,7 @@ class EventInfo
             'on_before_render' => t("Triggered in the %s class.", "View") . ' ' . t("Runs before a template is included / to be rendered."),
             'on_block_load' => t("Triggered in the %s class.", "BlockController") . ' ' . t("Runs after the block record is loaded from the database (or the cache). Once this is done, a block is ready to be rendered. Note that all blocks of an Area are first loaded, before they are rendered."),
             'on_block_before_render' => t("Triggered in the %s class.", "BlockView") . ' ' . t("Runs before the template of a block is included / to be rendered, and after the Block Controller has ran."),
+            'on_block_output' => t("Triggered in the %s class.", "Block") . ' ' . t("Runs just before a block is outputted on the page."),
             'on_user_login' => t("Triggered after a user is authenticated and just before the user is redirected."),
             'on_render_complete' => t("Triggered in the %s class.", "View") . ' ' . t("Runs when the whole page is rendered. The rendered HTML will then be sent as a Response."),
             'on_page_output' => t("Triggered in the %s class.", "PageView") . ' ' . t("Runs when a page finished rendering and is about to be written to the cache (if needed)."),
