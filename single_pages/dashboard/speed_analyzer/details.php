@@ -220,8 +220,6 @@ use Concrete\Core\Support\Facade\Url;
 
                     echo '<span>'.$item['event'].'</span>';
 
-
-
                     $helpText = $eventHelper->info($item['event']);
                     if ($helpText) {
                         ?>
