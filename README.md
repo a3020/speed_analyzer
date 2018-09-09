@@ -6,6 +6,9 @@
 ## Introduction
 concrete5 8.2.1 add-on to analyze how PHP loads a page request. It does so by tracking events and queries.
 
+## Installation
+`composer require a3020/speed_analyzer` or download the ZIP and extract it to `/packages`.
+
 ## Links
 https://www.concrete5.org/marketplace/addons/speed-analyzer/
 
