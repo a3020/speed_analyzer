@@ -1,3 +1,9 @@
+1.2.2
+- Set max number of reports to 75. If more are needed, it can be adjusted via a config setting.
+- Fix t-string for Localization class.
+- Fix various PHP notices (thanks mlocati).
+- Listen to on_block_output event.
+
 1.2.1
 - Add toggle button to easily enable and disable Speed Analyzer.
 
