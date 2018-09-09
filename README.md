@@ -18,7 +18,7 @@ Query details
 ![Query details](https://user-images.githubusercontent.com/1431100/45262842-1e4abb00-b41f-11e8-825b-6f88c8b3238a.png)
 
 Report in table view
-![Report table](https://user-images.githubusercontent.com/1431100/45262847-2c98d700-b41f-11e8-805e-8dfa71d34990.png)
+![Report table](https://user-images.githubusercontent.com/1431100/45263947-31b45100-b434-11e8-994f-c7ca2394867d.png)
 
 Diagnosis
 ![Diagnosis](https://user-images.githubusercontent.com/1431100/45262838-0a9f5480-b41f-11e8-8c62-2d72fa1810fa.png)

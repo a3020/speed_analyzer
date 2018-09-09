@@ -1,3 +1,6 @@
+1.2.3
+- Improve displaying the execution time between events.
+
 1.2.2
 - Set max number of reports to 75. If more are needed, it can be adjusted via a config setting.
 - Fix t-string for Localization class.
