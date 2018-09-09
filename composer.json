@@ -1,0 +1,13 @@
+{
+    "name": "a3020/speed_analyzer",
+    "description": "Analyze loading times of your concrete5 application",
+    "type": "concrete5-package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "a3020",
+            "email": "a3020@fastmail.com"
+        }
+    ],
+    "require": {}
+}
