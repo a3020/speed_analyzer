@@ -36,3 +36,18 @@
 .fa-warning {
     color: #dc9944;
 }
+
+#time-table .badge {
+    cursor: default;
+}
+
+#time-table .execution-time-between {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#time-table .event-badge {
+    background-color: #fff;
+    color: #b6b6b6;
+    border: 1px solid #ddd;
+}

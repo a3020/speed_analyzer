@@ -154,13 +154,22 @@ use Concrete\Core\Support\Facade\Url;
     </div>
 </div>
 
+
+<p class="text-muted">
+    <em>
+        <?php
+        echo t('Tip: Click on a bullet to go to the associated record in the table beneath.');
+        ?>
+    </em>
+</p>
+
 <div class="chart-container">
     <canvas id="loadingTimeChart"></canvas>
 </div>
 
 <hr>
 
-<table id="time-table" class="table js-time-table table-hover table-striped">
+<table id="time-table" class="table js-time-table">
     <thead>
         <tr>
             <th style="width: 140px;">
@@ -176,11 +185,10 @@ use Concrete\Core\Support\Facade\Url;
                 </i>
                 <?php echo t('Time'); ?>
             </th>
-            <th style="width: 170px;">
-                <i class="text-muted launch-tooltip fa fa-question-circle"
-                   title="<?php echo t("This column displays the amount of milliseconds between an event and the previous event. Because only the time of when an event is triggered is recorded, no exact information can be given about e.g. how long it took a block to render. However, it's most likely that if the difference in milliseconds is high, the code after the former event took long to complete. It might be a hint to optimize the code between those events."); ?>">
-                </i>
-                <?php echo t('Difference'); ?>
+            <th style="width: 150px;">
+                <?php
+                echo t('Category');
+                ?>
             </th>
             <th>
                 <i class="text-muted launch-tooltip fa fa-question-circle"
@@ -188,19 +196,49 @@ use Concrete\Core\Support\Facade\Url;
                 </i>
                 <?php echo t('Information'); ?>
             </th>
-            <th>
-                <i class="text-muted launch-tooltip fa fa-question-circle"
-                   title="<?php echo t("The number of SQL queries before the event was triggered and the total execution time of those queries. Logging can be disabled via %s.", t('Settings')); ?>">
-                </i>
-                <?php echo t('SQL Queries'); ?>
-            </th>
         </tr>
     </thead>
     <tbody>
         <?php
         $i = 1;
         foreach ($items as $key => $item) {
+            // The first item will be 0
+            if ($item['difference'] !== 0) {
+                ?>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                    <td class="text-muted execution-time-between">
+                        <i class="text-muted launch-tooltip fa fa-question-circle"
+                           title="<?php echo t("The number of milliseconds between two events."); ?>"
+                           ></i>
+                        <?php
+                        echo t('PHP execution') . ': ';
+                        echo '<strong>';
+                        echo $item['difference'] === 0 ? '-' : number_format($item['difference']).' '.t('ms');
+                        echo '</strong>';
+
+                        if ($item['number_of_queries']) {
+                            ?>
+                            <br>
+                            <i class="text-muted launch-tooltip fa fa-question-circle"
+                               title="<?php echo t("The number of SQL queries between two events and the total execution time of those queries.") . ' '
+                                   . t("Logging can be disabled via %s.", t('Settings')); ?>"
+                            ></i>
+                            <?php
+                            echo t('MySQL execution') . ': ';
+                            echo '<a href="'.Url::to('/ccm/system/speed_analyzer/query/'.$item['event_id']).'"
+                            title="'.t('View queries').'"
+                            class="number-of-queries dialog-launch" dialog-width="750" dialog-height="500" dialog-modal="true">'.
+                                t2('%d query in %s ms', '%d queries in %s ms', $item['number_of_queries'], $item['total_query_time_rounded']).
+                                '</a>';
+                        }
+                        ?>
+                    </td>
+                </tr>
+                <?php
+            }
             ?>
+
             <tr id="event-<?php echo $item['id'] ?>">
                 <td><span class="text-muted"><?php echo $i; ?></span></td>
                 <td>
@@ -211,41 +249,22 @@ use Concrete\Core\Support\Facade\Url;
                 </td>
                 <td>
                     <?php
-                    echo $item['difference'] === 0 ? '-' : number_format($item['difference']).' '.t('ms');
+                    echo '<span class="badge" style="background-color: '.$item['event_category_color'].'">'.$item['event_category'].'</span> ';
                     ?>
                 </td>
                 <td>
                     <?php
-                    echo '<span class="badge" style="background-color: '.$item['event_category_color'].'">'.$item['event_category'].'</span> ';
-
-                    echo '<span>'.$item['event'].'</span>';
-
                     $helpText = $eventHelper->info($item['event']);
-                    if ($helpText) {
-                        ?>
-                        <i class="text-muted launch-tooltip fa fa-question-circle"
-                           title="<?php echo $helpText; ?>">
-                        </i>
-                        <?php
-                    }
+                    $helpText = $helpText ? $helpText : t('No help available');
+                    echo '<span class="badge event-badge text-muted launch-tooltip" title="' . $helpText . '">';
+                        echo $item['event'];
+                        echo ' <i class="fa fa-question-circle"></i>';
+                    echo '</span>';
 
                     $html = $item['information']->getHtml();
                     if ($html) {
                         echo '<br><br>';
                         echo $html;
-                    }
-                    ?>
-                </td>
-                <td>
-                    <?php
-                    if ($item['number_of_queries']) {
-                        echo '<a href="'.Url::to('/ccm/system/speed_analyzer/query/'.$item['event_id']).'"
-                        title="'.t('View queries').'"
-                        class="number-of-queries dialog-launch" dialog-width="750" dialog-height="500" dialog-modal="true">'.
-                            t2('%d query in %s ms', '%d queries in %s ms', $item['number_of_queries'], $item['total_query_time_rounded']).
-                        '</a>';
-                    } else {
-                        echo t('-');
                     }
                     ?>
                 </td>
