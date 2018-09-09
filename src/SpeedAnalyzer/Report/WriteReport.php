@@ -193,7 +193,7 @@ class WriteReport implements ApplicationAwareInterface
         }
 
         if ($overwriteReports === false
-            && $this->hasTooManyReports((int) $this->config->get('speed_analyzer.reports.hard_limit', 1000))
+            && $this->hasTooManyReports((int) $this->config->get('speed_analyzer.reports.hard_limit', 75))
         ) {
             return false;
         }
