@@ -55,9 +55,12 @@ class ReportList extends ItemList implements ApplicationAwareInterface
      */
     protected function createPaginationObject()
     {
-        $adapter = new DoctrineDbalAdapter($this->deliverQueryObject(), function ($query) {
-            $query->setMaxResults(1);
+        $adapter = new DoctrineDbalAdapter(
+            $this->deliverQueryObject(), function ($query) {
+            $query->select('count(distinct r.id)')
+                ->setMaxResults(1);
         });
+
         $pagination = new Pagination($this, $adapter);
 
         return $pagination;
