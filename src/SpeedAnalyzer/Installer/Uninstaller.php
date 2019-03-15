@@ -3,18 +3,18 @@
 namespace A3020\SpeedAnalyzer\Installer;
 
 use Concrete\Core\Database\Connection\Connection;
-use Concrete\Core\Logging\Logger;
+use Psr\Log\LoggerInterface;
 use Exception;
 
 class Uninstaller
 {
-    /** @var Connection */
+    /** @var \Concrete\Core\Database\Connection\Connection */
     private $connection;
 
-    /** @var Logger */
+    /** @var Psr\Log\LoggerInterface */
     private $logger;
 
-    public function __construct(Connection $connection, Logger $logger)
+    public function __construct(Connection $connection, LoggerInterface $logger)
     {
         $this->connection = $connection;
         $this->logger = $logger;
@@ -36,7 +36,7 @@ class Uninstaller
         try {
             $this->connection->executeQuery("DROP TABLE IF EXISTS ".$tableName);
         } catch (Exception $e) {
-            $this->logger->addDebug($e->getMessage());
+            $this->logger->debug($e->getMessage());
         }
     }
 }

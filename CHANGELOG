@@ -1,3 +1,6 @@
+1.2.5
+- Fix Logger dependency issue in 8.4.5+.
+
 1.2.4
 - Fix pagination bug if there are more than 20 items.
 
